@@ -51,3 +51,68 @@ public class Solution {
             }
         }
     }
+    
+        // Complete the insertNodeAtPosition function below.
+
+    /*
+     * For your reference:
+     *
+     * SinglyLinkedListNode {
+     *     int data;
+     *     SinglyLinkedListNode next;
+     * }
+     *
+     */
+    static SinglyLinkedListNode insertNodeAtPosition(SinglyLinkedListNode head, int data, int position) {
+        int i=0;
+        SinglyLinkedListNode cur=head,prev=head;
+        if(head==null) return new SinglyLinkedListNode(data);
+        while(i<position && cur!=null) {
+            prev=cur;
+            cur=cur.next;
+            i+=1;
+        } 
+        if(cur==null && i<position) return head;
+        if(cur==null) {
+            prev.next=new SinglyLinkedListNode(data);
+            return head;
+        }
+        prev.next=new SinglyLinkedListNode(data);
+        prev.next.next=cur;
+        return head;
+    }
+    
+        private static final Scanner scanner = new Scanner(System.in);
+
+    public static void main(String[] args) throws IOException {
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
+
+        SinglyLinkedList llist = new SinglyLinkedList();
+
+        int llistCount = scanner.nextInt();
+        scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
+
+        for (int i = 0; i < llistCount; i++) {
+            int llistItem = scanner.nextInt();
+            scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
+
+            llist.insertNode(llistItem);
+        }
+
+        int data = scanner.nextInt();
+        scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
+
+        int position = scanner.nextInt();
+        scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
+
+        SinglyLinkedListNode llist_head = insertNodeAtPosition(llist.head, data, position);
+
+        printSinglyLinkedList(llist_head, " ", bufferedWriter);
+        bufferedWriter.newLine();
+
+        bufferedWriter.close();
+
+        scanner.close();
+    }
+}
+
